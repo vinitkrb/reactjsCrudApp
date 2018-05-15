@@ -1,0 +1,53 @@
+.App {
+  text-align: center;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.App-header {
+  background-color: #222;
+  height: 75px;
+  padding: 5px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.TVSeriesComp {
+  margin: 20px;
+}
+.TVSeries {
+    margin: 20px 0;
+    border: 1px solid #444;
+    border-spacing: 0;
+    margin-top:50px;
+  }
+
+  .TVSeriesHead {
+    background-color: rgb(0, 166, 255);
+  }
+  
+  .TVSeriesColumn {
+    border: 1px solid #444;
+    color:black;
+  }
+  .TVSeriesRow {
+    background: #ccc;
+  }
+
+  .TVSeriesRow:nth-child(even) {
+      background: #ddd;
+  }
+
+  span {
+    margin-right: 20px;
+  }
+
+  .saveButton {
+    height: 25px;
+    width: 30px;
+  }
