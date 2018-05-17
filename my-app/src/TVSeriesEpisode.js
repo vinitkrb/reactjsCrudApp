@@ -71,9 +71,10 @@ class TVSeriesEpisode extends Component {
     }
     
     componentWillMount() {
-        fetch(`http://omdbapi.com/?t=Game of Thrones&Season=2&apikey=DoNotUse`)
+        fetch(`http://omdbapi.com/?t=Game of Thrones&Season=2&apikey=a9e149fd`)
             .then(response => response.json())
             .then(data => {
+                this.setState.episodes=data;
                 console.log(data);
             })
     }
