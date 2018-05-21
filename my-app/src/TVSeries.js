@@ -9,6 +9,8 @@ class TVSeries extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            date: new Date(),
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             episodes: this.props.episodes,
             adding: false,
             editing: false,
@@ -43,6 +45,22 @@ class TVSeries extends Component {
                         }
                     })
         })
+    }
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
     }
     addEpisode() {
         this.setState({
@@ -127,9 +145,11 @@ class TVSeries extends Component {
         const tableHeaders = ["Episode", "Title", "Released", "imdbRating", "imdbID", "Action"];
         return (
             <div >
+                <h2 style={{ paddingLeft: 93 + 'em', fontSize: 13 + 'px' }}>{this.state.days[this.state.date.getDay()] + ',' + this.state.date.getDate() + '-' + ((this.state.date.getMonth() + 1 < 10) ? ('0' + (this.state.date.getMonth() + 1)) : (this.state.date.getMonth() + 1)) + '-' + this.state.date.getFullYear()}</h2>
+                <h2 style={{ paddingLeft: 95 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
                 <h2>Game of Thrones TV Series Episodes!</h2>
                 <span>
-                    <label style={{color:'green',padding:10+'px'}}>Would you like to add a new Episode?</label>
+                    <label style={{ color: 'green', padding: 10 + 'px' }}>Would you like to add a new Episode?</label>
                     <button onClick={this.addEpisode}><FaPlusCircle /></button>
                 </span>
                 <center><table className="TVSeries">
@@ -139,8 +159,8 @@ class TVSeries extends Component {
                         <tr className="TVSeriesHead">
                             {
                                 // mapping with label to table headers
-                                
-                                tableHeaders.map((label, i) => <th className="TVSeriesColumn" key={i}>{label}</th>) 
+
+                                tableHeaders.map((label, i) => <th className="TVSeriesColumn" key={i}>{label}</th>)
                             }
                         </tr>
 

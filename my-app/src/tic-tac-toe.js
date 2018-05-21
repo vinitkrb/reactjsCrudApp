@@ -6,7 +6,7 @@ import './index.css';
 class Square extends React.Component {
     render() {
         return (
-            <button className="square" onClick = {this.props.onClick}>{this.props.value}</button>
+            <button className="square" onClick={this.props.onClick}>{this.props.value}</button>
         );
     }
 }
@@ -23,8 +23,8 @@ class Board extends React.Component {
 
     render() {
         return (
-            <div style={{paddingLeft:45 +'em'}}>
-            <h2>TIC-TAC-TOE</h2><br/>
+            <div style={{ paddingLeft: 45 + 'em' }}>
+                <h2>TIC-TAC-TOE</h2><br />
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
@@ -49,6 +49,8 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            date: new Date(),
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             history: [
                 {
                     squares: Array(9).fill(null)
@@ -77,7 +79,22 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext
         });
     }
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
 
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
     jumpTo(step) {
         this.setState({
             stepNumber: step,
@@ -111,6 +128,8 @@ class Game extends React.Component {
         return (
             <div>
                 <div className="game-board">
+                    <h2 style={{ paddingLeft: 93 + 'em', fontSize: 13 + 'px' }}>{this.state.days[this.state.date.getDay()] + ',' + this.state.date.getDate() + '-' + ((this.state.date.getMonth() + 1 < 10) ? ('0' + (this.state.date.getMonth() + 1)) : (this.state.date.getMonth() + 1)) + '-' + this.state.date.getFullYear()}</h2>
+                    <h2 style={{ paddingLeft: 95 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
                     <Board
                         squares={current.squares}
                         onClick={i => this.handleClick(i)}
