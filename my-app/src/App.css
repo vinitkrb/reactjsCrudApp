@@ -1,19 +1,2 @@
-.styled-select {
-  height: 27px;
-  overflow: hidden;
-  width: 152px;
-}
-.styled-select select {
-  background: transparent;
-  border: none;
-  font-size: 14px;
-  height: 29px;
-  padding: 5px; /* If you add too much padding here, the options won't show in IE */
-  width: 260px;
-}
-.rounded {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
-}
+
 

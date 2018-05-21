@@ -126,8 +126,8 @@ class TVSeries extends Component {
     renderDisplay() {
         const tableHeaders = ["Episode", "Title", "Released", "imdbRating", "imdbID", "Action"];
         return (
-            <div className="App-header">
-                <h2>Welcome to Game of Thrones TV Series Episodes!</h2>
+            <div >
+                <h2>Game of Thrones TV Series Episodes!</h2>
                 <span>
                     <label style={{color:'green',padding:10+'px'}}>Would you like to add a new Episode?</label>
                     <button onClick={this.addEpisode}><FaPlusCircle /></button>
