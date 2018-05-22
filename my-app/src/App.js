@@ -13,11 +13,11 @@ const App = () => (
     <div>
       <div className="nav">
         <ul>
-          <li><a><Link to="/">Home </Link></a></li>
-          <li><a><Link to="/form">Form </Link></a></li>
-          <li><a><Link to="/toDoList">ToDoList </Link></a></li>
-          <li><a><Link to="/game">Game </Link></a></li>
-          <li><a><Link to="/tvSeriesEpisode">TV Series Episode</Link></a></li>
+          <li><Link to="/">Home </Link></li>
+          <li><Link to="/form">Form </Link></li>
+          <li><Link to="/toDoList">ToDoList </Link></li>
+          <li><Link to="/game">Game </Link></li>
+          <li><Link to="/tvSeriesEpisode">TV Series Episode</Link></li>
         </ul>
       </div><br />
       <Route path="/" exact component={Home} />
