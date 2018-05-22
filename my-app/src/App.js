@@ -6,19 +6,22 @@ import TVSeriesEpisode from './TVSeriesEpisode';
 import toDoList from './toDoList';
 import Form from './Form';
 import Game from './tic-tac-toe';
+import Home from './Home';
 
 const App = () => (
   <Router>
-    <div >
+    <div>
       <div className="nav">
         <ul>
-          <li><a><Link to="/">Form </Link></a></li>
+          <li><a><Link to="/">Home </Link></a></li>
+          <li><a><Link to="/form">Form </Link></a></li>
           <li><a><Link to="/toDoList">ToDoList </Link></a></li>
           <li><a><Link to="/game">Game </Link></a></li>
           <li><a><Link to="/tvSeriesEpisode">TV Series Episode</Link></a></li>
         </ul>
-      </div><br/>
-      <Route path="/" exact component={Form} />
+      </div><br />
+      <Route path="/" exact component={Home} />
+      <Route path="/form" exact component={Form} />
       <Route path="/toDoList" exact component={toDoList} />
       <Route path="/game" exact component={Game} />
       <Route path="/tvSeriesEpisode" exact component={TVSeriesEpisode} />
