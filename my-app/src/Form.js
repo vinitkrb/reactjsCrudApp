@@ -6,31 +6,56 @@ class Form extends Component {
         this.state = {
             date: new Date(),
             days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            firstName: '',
-            lastName: '',
-            gender: ''
+            fields: {},
+            errors: {}
         };
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleGender = this.handleGender.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleFirstNameChange(event) {
-        this.setState({ firstName: event.target.value.toUpperCase() });
-    }
-    handleLastNameChange(event) {
-        this.setState({ lastName: event.target.value.toUpperCase() });
-    }
-    handleGender(event) {
-        this.setState({ gender: event.target.value });
+    handleValidation() {
+        let fields = this.state.fields;
+        let errors = {};
+        let formIsValid = true;
+
+        if (!fields["firstName"]) {
+            formIsValid = false;
+            errors["firstName"] = "Please enter first name.";
+        }
+        if (!fields["lastName"]) {
+            formIsValid = false;
+            errors["lastName"] = "Please enter last name.";
+        }
+        if (typeof fields["firstName"] !== "undefined") {
+            if (!fields["firstName"].match(/^[a-zA-Z]+$/)) {
+                formIsValid = false;
+                errors["firstName"] = "Only letters";
+            }
+        }
+        if (typeof fields["lastName"] !== "undefined") {
+            if (!fields["lastName"].match(/^[a-zA-Z]+$/)) {
+                formIsValid = false;
+                errors["lastName"] = "Only letters";
+            }
+        }
+        if (!fields["gender"]) {
+            formIsValid = false;
+            errors["gender"] = "Please select gender.";
+        }
+        this.setState({ errors: errors });
+        return formIsValid;
     }
     handleSubmit(event) {
-        if (this.state.firstName && this.state.lastName) {
-            alert('Details Submitted by you: ' + this.state.firstName + ' ' + this.state.lastName + " Gender:" + this.state.gender);
+        if (this.handleValidation()) {
+            alert('Details Submitted by you: ' + this.state.fields["firstName"] + ' ' + this.state.fields["lastName"] + " Gender:" + this.state.fields["gender"]);
+        } else {
+            alert("Form has errors.")
         }
         event.preventDefault();
     }
-
+    handleChange(field, e) {
+        let fields = this.state.fields;
+        fields[field] = e.target.value;
+        this.setState({ fields });
+    }
     componentDidMount() {
         this.timerID = setInterval(
             () => this.tick(),
@@ -57,23 +82,28 @@ class Form extends Component {
                     <div style={{ width: 250 + 'px' }} className="form-control">
                         <form onSubmit={this.handleSubmit}>
                             <label>First Name:</label>
-                            <input placeholder="Enter first name" className="form-control" type="text" value={this.state.firstName} onChange={this.handleFirstNameChange} required /><br />
+                            <input placeholder="Enter first name" className="form-control" type="text" onChange={this.handleChange.bind(this, "firstName")} value={this.state.fields["firstName"]} /><br />
+                            <span style={{ color: "red" }}>{this.state.errors["firstName"]}</span>
+                            <br />
                             <label>Last Name:</label>
-                            <input placeholder="Enter last name" className="form-control" type="text" value={this.state.lastName} onChange={this.handleLastNameChange} required /><br />
+                            <input placeholder="Enter last name" className="form-control" type="text" onChange={this.handleChange.bind(this, "lastName")} value={this.state.fields["lastName"]} /><br />
+                            <span style={{ color: "red" }}>{this.state.errors["lastName"]}</span>
+                            <br />
                             <label style={{ paddingRight: 17 + 'px' }}>Gender:</label>
-                            <select className="form-control" value={this.state.gender} onChange={this.handleGender} >
+                            <select className="form-control" value={this.state.fields["gender"]} onChange={this.handleChange.bind(this, "gender")} >
                                 <option value="" disabled defaultValue hidden>Choose a Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Transgender">Transgender</option>
                             </select>
-                            <div style={{ paddingTop: 2 + 'em', textAlign:"right" }}>
+                            <span style={{ color: "red" }}>{this.state.errors["gender"]}</span>
+                            <br />
+                            <div style={{ paddingTop: 2 + 'em', textAlign: "right" }}>
                                 <input type="submit" value="Submit" />
                             </div >
                         </form>
                     </div>
                 </center>
-
             </div>
         );
     }
