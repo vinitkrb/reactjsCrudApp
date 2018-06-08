@@ -1,7 +1,6 @@
 import React from 'react';
-
 import './index.css';
-
+import Clock from 'react-icons/lib/md/access-time';
 
 class Square extends React.Component {
     render() {
@@ -10,7 +9,6 @@ class Square extends React.Component {
         );
     }
 }
-
 class Board extends React.Component {
     renderSquare(i) {
         return (
@@ -57,9 +55,21 @@ class Game extends React.Component {
                 }
             ],
             stepNumber: 0,
-            xIsNext: true
+            xIsNext: true,
+            isHidden: true
         };
     }
+    toggleHidden() {
+        this.setState({
+            isHidden: !this.state.isHidden
+        })
+    }
+    Child = () => (
+        <div>
+            <h2 style={{ paddingLeft: 88 + 'em', fontSize: 13 + 'px' }}>{this.state.days[this.state.date.getDay()] + ',' + this.state.date.getDate() + '-' + ((this.state.date.getMonth() + 1 < 10) ? ('0' + (this.state.date.getMonth() + 1)) : (this.state.date.getMonth() + 1)) + '-' + this.state.date.getFullYear()}</h2>
+            <h2 style={{ paddingLeft: 89 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
+        </div>
+    )
 
     handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -128,8 +138,13 @@ class Game extends React.Component {
         return (
             <div>
                 <div className="game-board">
-                    <h2 style={{ paddingLeft: 93 + 'em', fontSize: 13 + 'px' }}>{this.state.days[this.state.date.getDay()] + ',' + this.state.date.getDate() + '-' + ((this.state.date.getMonth() + 1 < 10) ? ('0' + (this.state.date.getMonth() + 1)) : (this.state.date.getMonth() + 1)) + '-' + this.state.date.getFullYear()}</h2>
-                    <h2 style={{ paddingLeft: 95 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
+                    <div>
+                        <button className="btn btn-success" style={{float:'right'}} onClick={this.toggleHidden.bind(this)} >
+                            <span> Display <Clock /></span>
+                        </button>
+                        {!this.state.isHidden && <this.Child />}
+                    </div>
+
                     <Board
                         squares={current.squares}
                         onClick={i => this.handleClick(i)}
@@ -166,3 +181,4 @@ function calculateWinner(squares) {
     }
     return null;
 }
+

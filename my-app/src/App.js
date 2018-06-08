@@ -7,6 +7,7 @@ import toDoList from './toDoList';
 import Form from './Form';
 import Game from './tic-tac-toe';
 import Home from './Home';
+import Chart from './Chart';
 
 const App = () => (
   <Router>
@@ -14,6 +15,7 @@ const App = () => (
       <div className="nav">
         <ul>
           <li><Link to="/">Home </Link></li>
+          <li><Link to="/chart">Chart </Link></li>
           <li><Link to="/form">Form </Link></li>
           <li><Link to="/toDoList">ToDoList </Link></li>
           <li><Link to="/game">Game </Link></li>
@@ -21,6 +23,7 @@ const App = () => (
         </ul>
       </div><br />
       <Route path="/" exact component={Home} />
+      <Route path="/chart" exact component={Chart } />
       <Route path="/form" exact component={Form} />
       <Route path="/toDoList" exact component={toDoList} />
       <Route path="/game" exact component={Game} />

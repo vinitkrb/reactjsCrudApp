@@ -146,7 +146,7 @@ class TVSeries extends Component {
         return (
             <div >
                 <h2 style={{ paddingLeft: 93 + 'em', fontSize: 13 + 'px' }}>{this.state.days[this.state.date.getDay()] + ',' + this.state.date.getDate() + '-' + ((this.state.date.getMonth() + 1 < 10) ? ('0' + (this.state.date.getMonth() + 1)) : (this.state.date.getMonth() + 1)) + '-' + this.state.date.getFullYear()}</h2>
-                <h2 style={{ paddingLeft: 95 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
+                <h2 style={{ paddingLeft: 94 + 'em', fontSize: 13 + 'px' }} >{this.state.date.toLocaleTimeString()}.</h2>
                 <h2>Game of Thrones TV Series Episodes!</h2>
                 <span>
                     <label style={{ color: 'green', padding: 10 + 'px' }}>Would you like to add a new Episode?</label>
